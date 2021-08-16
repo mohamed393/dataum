@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <!-- start page title -->
+  <!-- end page title -->
+
+  <form [formGroup]="taskForm">
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <label for="">Name</label>
+      <input type="text" formControlName="eventName" class="form-control">
+    </div>
+    <div class="form-group col-sm-6 col-lg-6">
+      <label>Due Date</label>
+      <div class="input-group clockpicker">
+        <input ngbDatepicker container="body"    [autoClose]="true"  formControlName="dueDate" class="form-control"  placeholder="yyyy-mm-dd"
+               #date="ngbDatepicker">
+        <div class="input-group-append" (click)="date.toggle()">
+          <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    <div  formArrayName="tasks">
+      <div *ngFor="let data1 of tasksFormData().controls; let i=index;">
+        <div [formGroupName]="i" class="row align-items-center  ">
+          <div class="form-group col-lg-3">
+            <label for="">task Name</label>
+            <input type="text" formControlName="taskName" class="form-control">
+          </div>
+          <div class="form-group col-lg-2">
+            <label>Start Date</label>
+            <div class="input-group clockpicker">
+              <input ngbDatepicker formControlName="startDate" [autoClose]="true" class="form-control"  placeholder="yyyy-mm-dd"
+                     #date2="ngbDatepicker">
+              <div class="input-group-append" (click)="date2.toggle()">
+                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-lg-2">
+            <label>End Date</label>
+            <div class="input-group clockpicker">
+              <input ngbDatepicker formControlName="endDate" class="form-control" [autoClose]="true" placeholder="yyyy-mm-dd"
+                     #date3="ngbDatepicker">
+              <div class="input-group-append" (click)="date3.toggle()">
+                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl col-lg-3">
+            <div class="form-group ">
+              <label>Priority</label>
+              <select formControlName="priority" class="form-control select2-search-disable">
+                <option value="low" >Low</option>
+                <option value="meduim">Meduim</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="mt-2 mt-md-0">
+              <input type="button" class="btn btn-primary btn-block inner" value="Delete"
+                     (click)="deleteRow(i)"/>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+  </form>
+  <div class="row justify-content-end">
+    <div class="col-lg-10">
+      <input data-repeater-create type="button" class="btn btn-success inner" value="{{'addNewTask'|translate}}"
+             (click)="AddRow()"/>
+             <input data-repeater-create type="button" class="ml-5 btn btn-success inner" value="{{'save'|translate}}"
+             (click)="save()"/>
+    </div>
+  </div>
+</div> <!-- container-fluid -->
